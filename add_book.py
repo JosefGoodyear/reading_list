@@ -46,10 +46,17 @@ def print_books(formatted_books):
         exit()
 
 
+def add_to_reading_list(book, reading_list):
+    """ Append book to file, creating file if necessary """
+    book = book[3:]
+    with open(reading_list, "a+") as f:
+        f.write(book + '\n')
+
+
 def add_book():
     """ Search, choose and add a book to your reading list """
     query = input("What book are you looking for?\n")
     books = search(query)
     formatted_books = format_books(books)
     book = print_books(formatted_books)
-    print(book)
+    add_to_reading_list(book, "ReadingList.txt")

@@ -2,6 +2,7 @@
 import unittest
 import add_book
 from unittest import mock
+import os
 
 
 class searchTest(unittest.TestCase):
@@ -58,6 +59,30 @@ class printBooksTest(unittest.TestCase):
         with self.assertRaises(SystemExit):
             with mock.patch('builtins.input', return_value='quit'):
                 add_book.print_books(self.books)
+
+
+class addBookToReadingListTest(unittest.TestCase):
+
+    book1 = "2: Python for Kids by Jason R. Briggs (No Starch Press)"
+    book2 = "4: Python by Chris Fehily (Peachpit Press)"
+
+    def tearDown(self):
+        os.remove("TestReadingList.txt")
+
+    def test_new_line_for_each_entry(self):
+
+        def find_file_length(f):
+            print(len(f))
+            with open(f) as f:
+                for i, line in enumerate(f):
+                    pass
+            return i + 1
+
+        add_book.add_to_reading_list(self.book1, "TestReadingList.txt")
+        length_1 = find_file_length("TestReadingList.txt")
+        add_book.add_to_reading_list(self.book2, "TestReadingList.txt")
+        length_2 = find_file_length("TestReadingList.txt")
+        self.assertEqual(length_1 + 1, length_2)
 
 
 if __name__ == '__main__':
