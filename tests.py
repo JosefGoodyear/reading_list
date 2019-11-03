@@ -1,4 +1,5 @@
 import unittest, read, view_reading_list, add_book
+from unittest import mock
 
 class searchTest(unittest.TestCase):
 
@@ -30,5 +31,29 @@ class formatBooksTest(unittest.TestCase):
         self.assertEqual(formatted_books[0], '1: Fake Book by None (Publisher)')
 
 
+class printBooksTest(unittest.TestCase):
+
+    books = ["1: Python by Joseph Eddy Fontenrose (Biblo & Tannen Publishers)",
+            "2: Python for Kids by Jason R. Briggs (No Starch Press)",
+            "3: Learning Python by Mark Lutz (O'Reilly Media, Inc.)",
+            "4: Python by Chris Fehily (Peachpit Press)",
+            "5: Python for Everybody by Charles R. Severance (None)"]
+    
+    def test_out_of_range_book(self):
+        with self.assertRaises(SystemExit):
+            with mock.patch('builtins.input', return_value='0'):
+                add_book.print_books(self.books)
+
+    def test_book_on_edge(self):
+        
+        with mock.patch('builtins.input', return_value='5'):
+            book = add_book.print_books(self.books)
+            self.assertEqual(book, "5: Python for Everybody by Charles R. Severance (None)")
+
+    def test_other_key(self):
+        with self.assertRaises(SystemExit):
+            with mock.patch('builtins.input', return_value='quit'):
+                add_book.print_books(self.books)
+    
 if __name__ == '__main__':
     unittest.main()

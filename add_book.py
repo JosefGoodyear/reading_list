@@ -30,12 +30,21 @@ def format_books(books):
         formatted_books.append('{}: {} by {} ({})'.format(num + 1, book[0], authors, book[2]))
     return formatted_books
 
+def print_books(formatted_books):
+    for book in formatted_books:
+        print(book)
+    book_to_add = input('Enter the corresponding number to add a book to your reading list, or any other key to exit\n')
+    if book_to_add.isdigit() and  0 < int(book_to_add) <= len(formatted_books):
+        return formatted_books[int(book_to_add) - 1]
+    else:
+        exit()
+
 
 def add_book():
     """ Search, choose and add a book to your reading list """
     query = input("What book are you looking for?\n")
     books = search(query)
     formatted_books = format_books(books)
-    print(formatted_books)
-
+    book = print_books(formatted_books)
+    print(book)
    
