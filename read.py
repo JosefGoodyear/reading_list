@@ -17,6 +17,6 @@ def main():
         print("That is not a valid choice. Please choose 1, 2, or 3.")
         main()
 
-if __name__ == '__main__':
-    main()    
 
+if __name__ == '__main__':
+    main()

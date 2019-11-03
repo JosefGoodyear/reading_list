@@ -12,13 +12,14 @@ def search(query):
         print("Sorry, your search didn't return any results.")
         exit()
     for i in range(item_range):
-        book_info = obj.get('items')[i].get('volumeInfo') 
+        book_info = obj.get('items')[i].get('volumeInfo')
         title = book_info.get('title')
         authors = book_info.get('authors')
         publisher = book_info.get('publisher')
         books.append([title, authors, publisher])
     return books
-    
+
+
 def format_books(books):
     """ Format results into strings for printing """
     formatted_books = []
@@ -27,14 +28,19 @@ def format_books(books):
             authors = ', '.join(book[1])
         else:
             authors = 'None'
-        formatted_books.append('{}: {} by {} ({})'.format(num + 1, book[0], authors, book[2]))
+        formatted_books.append('{}: {} by {} ({})'
+                               .format(num + 1, book[0], authors, book[2]))
     return formatted_books
 
+
 def print_books(formatted_books):
+    """ print books from user query and ask user to add a specific book """
     for book in formatted_books:
         print(book)
-    book_to_add = input('Enter the corresponding number to add a book to your reading list, or any other key to exit\n')
-    if book_to_add.isdigit() and  0 < int(book_to_add) <= len(formatted_books):
+    book_to_add = input(
+        'Enter the corresponding number to add a book to your reading list,' +
+        'or any other key to exit\n')
+    if book_to_add.isdigit() and 0 < int(book_to_add) <= len(formatted_books):
         return formatted_books[int(book_to_add) - 1]
     else:
         exit()
@@ -47,4 +53,3 @@ def add_book():
     formatted_books = format_books(books)
     book = print_books(formatted_books)
     print(book)
-   
