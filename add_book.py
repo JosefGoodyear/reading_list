@@ -5,7 +5,12 @@ def search(query):
     """ Search for a keyword and return an array containing title, author and
         publisher information of the first 5 results """
     url = 'https://www.googleapis.com/books/v1/volumes?q={}'.format(query)
-    obj = requests.get(url).json()
+    try:
+        obj = requests.get(url).json()
+    except (requests.exceptions.ConnectionError, requests.exceptions.Timeout):
+        print('There was an error connecting to the Google Books API.' +
+              'Please check your internet connection and try again')
+        exit()
     books = []
     item_range = min(obj.get('totalItems'), 5)
     if item_range == 0:
