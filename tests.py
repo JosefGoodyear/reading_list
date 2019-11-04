@@ -9,6 +9,16 @@ from view_reading_list import view_reading_list
 
 class searchTest(unittest.TestCase):
 
+    def test_empty_string_search(self):
+        with mock.patch('builtins.input', return_value='test'):
+            books = add_book.search('')
+        self.assertGreaterEqual(len(books), 0)
+
+    def test_spaces_string_search(self):
+        with mock.patch('builtins.input', return_value='test'):
+            books = add_book.search('         ')
+        self.assertGreaterEqual(len(books), 0)
+
     def test_full_return_length(self):
         books = add_book.search('test')
         self.assertEqual(len(books), 5)
