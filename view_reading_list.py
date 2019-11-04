@@ -1,8 +1,9 @@
-def view_reading_list():
+def view_reading_list(reading_list_file):
+    """ Print your reading list to the terminal """
     try:
-        with open('ReadingList.txt') as f:
+        with open(reading_list_file) as f:
             reading_list = f.read()
+        print()
         print(reading_list)
     except IOError:
-        print('Your reading list could not be found.' +
-              'Please name the file ReadingList.txt.')
+        print('{} could not be found.'.format(reading_list_file))

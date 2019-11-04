@@ -10,7 +10,7 @@ def main():
     if choice == '1':
         add_book()
     elif choice == '2':
-        view_reading_list()
+        view_reading_list("ReadingList.txt")
     elif choice == '3':
         exit()
     else:
