@@ -4,6 +4,9 @@ import requests
 def search(query):
     """ Search for a keyword and return an array containing title, author and
         publisher information of the first 5 results """
+    while query == '' or query.isspace():
+        print('You entered an empty search query.')
+        query = input('What do you want to search for?\n')
     url = 'https://www.googleapis.com/books/v1/volumes?q={}'.format(query)
     try:
         obj = requests.get(url).json()
@@ -65,7 +68,7 @@ def add_to_reading_list(book, reading_list):
 
 def add_book():
     """ Search, choose and add a book to your reading list """
-    query = input("What book are you looking for?\n")
+    query = input("What do you want to search for?\n")
     books = search(query)
     formatted_books = format_books(books)
     book = print_books(formatted_books)
