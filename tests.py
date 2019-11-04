@@ -1,8 +1,10 @@
 #!/usr/bin/env python3
 import unittest
 import add_book
-from unittest import mock
 import os
+import io
+from unittest import mock
+from view_reading_list import view_reading_list
 
 
 class searchTest(unittest.TestCase):
@@ -84,6 +86,28 @@ class addBookToReadingListTest(unittest.TestCase):
         add_book.add_to_reading_list(self.book2, "TestReadingList.txt")
         length_2 = find_file_length("TestReadingList.txt")
         self.assertEqual(length_1 + 1, length_2)
+
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def assert_stdout(self, n, expected_output, mock_stdout):
+        add_book.add_to_reading_list(self.book1, "path/to/file.txt")
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_fail_to_write(self):
+        self.assert_stdout(2, ('There was an error opening/writing ' +
+                               'to the file. Python for Kids by Jason R. '
+                               'Briggs (No Starch Press) ' +
+                               'was not added to your reading list\n'))
+
+
+class viewReadingListTest(unittest.TestCase):
+
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def assert_stdout(self, n, expected_output, mock_stdout):
+        view_reading_list('doesNotExist.txt')
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_fail_to_open(self):
+        self.assert_stdout(2, ('doesNotExist.txt could not be found.\n'))
 
 
 if __name__ == '__main__':
