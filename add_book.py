@@ -46,8 +46,8 @@ def print_books(formatted_books):
     for book in formatted_books:
         print(book)
     book_to_add = input(
-        'Enter the corresponding number to add a book to your reading list,' +
-        'or any other key to exit\n')
+        'Enter the corresponding number to add a book to your reading list' +
+        ' or any other key to exit:\n')
     if book_to_add.isdigit() and 0 < int(book_to_add) <= len(formatted_books):
         return formatted_books[int(book_to_add) - 1]
     else:
@@ -60,10 +60,10 @@ def add_to_reading_list(book, reading_list):
     try:
         with open(reading_list, "a+") as f:
             f.write(book + '\n')
-        print("{} was added to your reading list".format(book))
+        print("{} was added to your reading list.".format(book))
     except IOError:
         print('There was an error opening/writing to the file.' +
-              ' {} was not added to your reading list'.format(book))
+              ' {} was not added to your reading list.'.format(book))
 
 
 def add_book():
