@@ -49,8 +49,13 @@ def print_books(formatted_books):
 def add_to_reading_list(book, reading_list):
     """ Append book to file, creating file if necessary """
     book = book[3:]
-    with open(reading_list, "a+") as f:
-        f.write(book + '\n')
+    try:
+        with open(reading_list, "a+") as f:
+            f.write(book + '\n')
+        print("{} was added to your reading list".format(book))
+    except IOError:
+        print('There was an error opening/writing to the file.' +
+              ' {} was not added to your reading list'.format(book))
 
 
 def add_book():

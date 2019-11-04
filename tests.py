@@ -67,7 +67,8 @@ class addBookToReadingListTest(unittest.TestCase):
     book2 = "4: Python by Chris Fehily (Peachpit Press)"
 
     def tearDown(self):
-        os.remove("TestReadingList.txt")
+        if os.path.exists('TestReadingList.txt'):
+            os.remove('TestReadingList.txt')
 
     def test_new_line_for_each_entry(self):
 
