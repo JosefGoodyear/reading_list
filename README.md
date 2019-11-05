@@ -1,9 +1,20 @@
 # Reading List
-### Create a command line application that allows you to use the Google Books API to search for books and construct a reading list. 
+### Description
+Search for books using the Google Books API, add them to a local reading list, and view that reading list.
+### Requirements
+This project was tested with Python 3.7 and requires Python 3 and the requests module to run properly. An internet connection is required to add books to the reading list, but the reading list can be viewed offline.
 
-* Type in a query and display a list of 5 books matching that query.
+Pipfile and Pipfile.lock are included if you want to use a virtual environment. Just run ```pipenv install``` and ```pipenv shell```.
 
-* Each item in the list should include the book's author, title, and publishing company.
-* A user should be able to select a book from the five displayed to save to a “Reading List”
-* View a “Reading List” with all the books the user has selected from their queries -- this is a local reading list and not tied to Google Books’s account features.
+### Usage
+Clone this project and type ```./read.py``` into the command line to start the program. From there, follow the instructions in your terminal.
+### Files
+* **read.py**: Contains the main function for running the program.
+* **add_book.py**: Contains functions for adding books to the reading list.
+* **view_reading_list.py**: Contains functions for viewing the reading list.
+* **tests.py**: Contains tests for the program.
+### Tests
+Tests have been built with Python's built-in unittest module. To run tests, enter ```./tests.py``` into the command line.
 
+### Author
+[Josef Goodyear](https://github.com/JosefGoodyear)
