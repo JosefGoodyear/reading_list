@@ -106,7 +106,7 @@ class addBookToReadingListTest(unittest.TestCase):
         self.assert_stdout(2, ('There was an error opening/writing ' +
                                'to the file. Python for Kids by Jason R. '
                                'Briggs (No Starch Press) ' +
-                               'was not added to your reading list\n'))
+                               'was not added to your reading list.\n'))
 
 
 class viewReadingListTest(unittest.TestCase):
