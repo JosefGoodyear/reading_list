@@ -9,7 +9,14 @@ class ReadingList:
     def add_book(self, book):
         if type(book) is not Book:
             exit()
-        pass
+        try:
+            book = str(book)
+            with open(self.filename, "a+") as f:
+                f.write(book + '\n')
+            print("{} was added to your reading list.".format(book))
+        except IOError:
+            print('There was an error opening/writing to the file.' +
+                  ' {} was not added to your reading list.'.format(book))
 
     def view(self):
         try:
@@ -19,12 +26,3 @@ class ReadingList:
             print(reading_list)
         except IOError:
             print('{} could not be found.'.format(self.filename))
-
-
-def main():
-    reading_list = ReadingList('ReadingList.txt')
-    reading_list.view()
-
-
-if __name__ == '__main__':
-    main()
