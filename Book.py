@@ -1,17 +1,17 @@
 import requests
 
 
-def get_search_obj(query):
+def get_books(query):
     while query == '' or query.isspace():
         print('You entered an empty search query.')
         query = input('What do you want to search for?\n')
     url = 'https://www.googleapis.com/books/v1/volumes?q={}'.format(query)
     try:
         obj = requests.get(url).json()
-    except (requests.exceptions.Re):
+    except (requests.exceptions.RequestException):
         print('There was an error connecting to the Google Books API.' +
               'Please check your internet connection and try again')
-        exit()
+        exit(1)
     else:
         return obj
 
@@ -40,9 +40,9 @@ class Book:
 
 
 def main():
-    obj = get_search_obj('baseball')
+    query = input('What do you want to search for?\n')
+    obj = get_books(query)
     books = []
-    
     for i in range(5):
         books.append(Book(obj, i))
         books[i].print_book()
