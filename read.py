@@ -9,7 +9,7 @@ def get_books(query):
     while query == '' or query.isspace():
         print('You entered an empty search query.')
         query = input('What do you want to search for?\n')
-    url = 'https://www.googleapis.com/books/v1/volumes?q={}'.format(query)
+    url = 'https://www.googleapis.com/books/v1/volumes?q={}&maxResults=5'.format(query)
     try:
         obj = requests.get(url).json()
     except requests.exceptions.RequestException:
@@ -17,17 +17,16 @@ def get_books(query):
               'Please check your internet connection and try again')
         exit()
     else:
-        return obj
+        return obj.get('items')
 
 
 def construct_books_array(obj):
-    """ Build a books array of at most 5 Book objects """
+    """ Build a books array of all of the returned objects """
     books = []
-    item_range = min(obj.get('totalItems'), 5)
-    if item_range == 0:
+    if obj is None:
         print("Sorry, your search didn't return any results.")
         exit()
-    for i in range(item_range):
+    for i in range(len(obj)):
         books.append(Book(obj, i))
         books[i].print_book()
     return books
