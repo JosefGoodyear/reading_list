@@ -20,8 +20,15 @@ def get_books(query):
         return obj
 
 
+def validate_book_choice(books):
+    book_choice = input('Enter the corresponding number to add a book to your reading list' +
+                        ' or any other key to exit:\n')
+    if book_choice.isdigit() and 0 < int(book_choice) <= 5:
+        return books[int(book_choice) - 1]
+    exit()
+
+
 def main():
-    
     reading_list = ReadingList('ReadingList.txt')
     while True:
         choice = input('Welcome to your reading list.' +
@@ -30,11 +37,15 @@ def main():
         if choice == '1':
             obj = get_books(input('What are you looking for?\n'))
             books = []
-            for i in range(5):
+            item_range = min(obj.get('totalItems'), 5)
+            if item_range == 0:
+                print("Sorry, your search didn't return any results.")
+                continue
+            for i in range(item_range):
                 books.append(Book(obj, i))
                 books[i].print_book()
-            reading_list.add_book(books[int(input()) - 1])
-
+            book = validate_book_choice(books)
+            reading_list.add_book(book)
         elif choice == '2':
             reading_list.view()
         elif choice == '3':
