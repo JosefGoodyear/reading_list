@@ -1,8 +1,8 @@
 
 class Book:
 
-    def __init__(self, obj, id):
-        book_info = obj[id].get('volumeInfo')
+    def __init__(self, items, id):
+        book_info = items[id].get('volumeInfo')
         self.id = id + 1
         self.title = book_info.get('title')
         self.authors = book_info.get('authors')

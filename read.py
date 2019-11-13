@@ -15,29 +15,31 @@ def get_books(query):
     except requests.exceptions.RequestException:
         print('There was an error connecting to the Google Books API.' +
               'Please check your internet connection and try again')
-        exit()
+        return False
     else:
-        return obj.get('items')
+        items = obj.get('items')
+        if items is None:
+            print("\nSorry, your search didn't return any results.")
+            return False
+        return items
 
 
-def construct_books_array(obj):
-    """ Build a books array of all of the returned objects """
+def construct_books_array(items):
+    """ Build a books array of all of the returned items """
     books = []
-    if obj is None:
-        print("Sorry, your search didn't return any results.")
-        exit()
-    for i in range(len(obj)):
-        books.append(Book(obj, i))
+    for i in range(len(items)):
+        books.append(Book(items, i))
         books[i].print_book()
     return books
 
 
 def validate_book_choice(books):
     book_choice = input('\nEnter the corresponding number to add a book to' +
-                        ' your reading list or any other key to exit:\n')
-    if book_choice.isdigit() and 0 < int(book_choice) <= 5:
+                        ' your reading list or any other key to return' +
+                        ' to the main menu:\n')
+    if book_choice.isdigit() and 0 < int(book_choice) <= len(books):
         return books[int(book_choice) - 1]
-    exit()
+    return False
 
 
 def main():
@@ -47,9 +49,13 @@ def main():
                        ' Please choose an option:\n\n' +
                        '1: Add a book\n2: View your reading list\n3: Exit\n')
         if choice == '1':
-            obj = get_books(input('\nWhat are you looking for?\n'))
-            books = construct_books_array(obj)
+            items = get_books(input('\nWhat are you looking for?\n'))
+            if items is False:
+                continue
+            books = construct_books_array(items)
             book = validate_book_choice(books)
+            if book is False:
+                continue
             reading_list.add_book(book)
         elif choice == '2':
             reading_list.view()
