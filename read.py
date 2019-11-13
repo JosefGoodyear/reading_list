@@ -4,7 +4,7 @@ from Book import Book
 from ReadingList import ReadingList
 
 
-def get_books(query):
+def get_api_items(query):
     """ Return a JSON dictionary based on user's search term. """
     while query == '' or query.isspace():
         print('You entered an empty search query.')
@@ -50,7 +50,7 @@ def main():
                        ' Please choose an option:\n\n' +
                        '1: Add a book\n2: View your reading list\n3: Exit\n')
         if choice == '1':
-            items = get_books(input('\nWhat are you looking for?\n'))
+            items = get_api_items(input('\nWhat are you looking for?\n'))
             if items is False:
                 continue
             books = construct_books_array(items)
