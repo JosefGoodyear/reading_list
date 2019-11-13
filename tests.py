@@ -1,35 +1,31 @@
 #!/usr/bin/env python3
 import unittest
-import add_book
 import os
 import io
 from unittest import mock
-from view_reading_list import view_reading_list
+from read import get_api_items
+from Book import Book
+from ReadingList import ReadingList
 
 
-class searchTest(unittest.TestCase):
+class getApiItems(unittest.TestCase):
+
+    def test_return_length(self):
+        items = get_api_items('test')
+        self.assertEqual(len(items), 5)
 
     def test_empty_string_search(self):
         with mock.patch('builtins.input', return_value='test'):
-            books = add_book.search('')
-        self.assertGreaterEqual(len(books), 0)
+            items = get_api_items('')
+        self.assertGreaterEqual(len(items), 0)
 
     def test_spaces_string_search(self):
         with mock.patch('builtins.input', return_value='test'):
-            books = add_book.search('         ')
-        self.assertGreaterEqual(len(books), 0)
+            items = get_api_items('         ')
+        self.assertGreaterEqual(len(items), 0)
 
-    def test_full_return_length(self):
-        books = add_book.search('test')
-        self.assertEqual(len(books), 5)
-
-    def test_nested_array_length(self):
-        books = add_book.search('test')
-        self.assertEqual(len(books[0]), 3)
-
-    def test_empty_return(self):
-        with self.assertRaises(SystemExit):
-            add_book.search('kf4ieraeroiujero2jlk')
+    def test_bad_search(self):
+        self.assertFalse(get_api_items('kf4ierae132roiujmlero2jlk'))
 
 
 class formatBooksTest(unittest.TestCase):
@@ -117,7 +113,7 @@ class viewReadingListTest(unittest.TestCase):
         self.assertEqual(mock_stdout.getvalue(), expected_output)
 
     def test_fail_to_open(self):
-        self.assert_stdout(2, ('doesNotExist.txt could not be found.\n'))
+        self.assert_stdout(2, ('doesNotExist.txt could not be found.\n')) """
 
 
 if __name__ == '__main__':
