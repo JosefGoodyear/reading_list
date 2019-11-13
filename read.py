@@ -20,9 +20,22 @@ def get_books(query):
         return obj
 
 
+def construct_books_array(obj):
+    """ build a books array of at most 5 Book objects """
+    books = []
+    item_range = min(obj.get('totalItems'), 5)
+    if item_range == 0:
+        print("Sorry, your search didn't return any results.")
+        exit()
+    for i in range(item_range):
+        books.append(Book(obj, i))
+        books[i].print_book()
+    return books
+
+
 def validate_book_choice(books):
-    book_choice = input('Enter the corresponding number to add a book to your reading list' +
-                        ' or any other key to exit:\n')
+    book_choice = input('Enter the corresponding number to add a book to' +
+                        ' your reading list or any other key to exit:\n')
     if book_choice.isdigit() and 0 < int(book_choice) <= 5:
         return books[int(book_choice) - 1]
     exit()
@@ -36,14 +49,7 @@ def main():
                        '\n1: Add a book\n2: View your reading list\n3: Exit\n')
         if choice == '1':
             obj = get_books(input('What are you looking for?\n'))
-            books = []
-            item_range = min(obj.get('totalItems'), 5)
-            if item_range == 0:
-                print("Sorry, your search didn't return any results.")
-                continue
-            for i in range(item_range):
-                books.append(Book(obj, i))
-                books[i].print_book()
+            books = construct_books_array(obj)
             book = validate_book_choice(books)
             reading_list.add_book(book)
         elif choice == '2':
