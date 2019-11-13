@@ -9,7 +9,8 @@ def get_books(query):
     while query == '' or query.isspace():
         print('You entered an empty search query.')
         query = input('What do you want to search for?\n')
-    url = 'https://www.googleapis.com/books/v1/volumes?q={}&maxResults=5'.format(query)
+    url = ('https://www.googleapis.com/books/v1/volumes?' +
+           'q={}&maxResults=5').format(query)
     try:
         obj = requests.get(url).json()
     except requests.exceptions.RequestException:
