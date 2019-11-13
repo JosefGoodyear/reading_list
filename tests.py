@@ -8,7 +8,7 @@ from Book import Book
 from ReadingList import ReadingList
 
 
-class getApiItems(unittest.TestCase):
+class getApiItemsTest(unittest.TestCase):
 
     def test_return_length(self):
         items = get_api_items('test')
@@ -28,21 +28,41 @@ class getApiItems(unittest.TestCase):
         self.assertFalse(get_api_items('kf4ierae132roiujmlero2jlk'))
 
 
-class formatBooksTest(unittest.TestCase):
+class BookTest(unittest.TestCase):
 
-    def test_multiple_authors(self):
-        expected = '1: Fake Book by Author 1, Author 2 (Publisher)'
-        books = [['Fake Book', ['Author 1', 'Author 2'], 'Publisher']]
-        formatted_books = add_book.format_books(books)
-        self.assertEqual(formatted_books[0], expected)
+    def setUp(self):
+        info = {'title': 'Fake Book', 'authors': ['Fake Author'],
+                'publisher': 'Fake Publisher', 'publishedDate': '2007'}
+        self.book = Book(info, 1)
 
-    def test_authors_is_none(self):
-        expected = '1: Fake Book by None (Publisher)'
-        books = [['Fake Book', None, 'Publisher']]
-        formatted_books = add_book.format_books(books)
-        self.assertEqual(formatted_books[0], expected)
+    def test_init(self):
+        self.assertEqual(self.book.id, 1)
+        self.assertEqual(self.book.title, 'Fake Book')
+        self.assertEqual(self.book.authors, ['Fake Author'])
+        self.assertEqual(self.book.publisher, 'Fake Publisher')
+
+    def test_convert_authors_none(self):
+        self.book.authors = None
+        self.assertEqual(self.book.convert_authors(), None)
+
+    def test_convert_authors_multiple(self):
+        self.book.authors = ['Author1, Author2']
+        self.assertEqual(self.book.convert_authors(), 'Author1, Author2')
+
+    def test_str(self):
+        self.assertEqual(str(self.book),
+                         'Fake Book by Fake Author (Fake Publisher)')
+
+    @unittest.mock.patch('sys.stdout', new_callable=io.StringIO)
+    def assert_stdout(self, n, expected_output, mock_stdout):
+        self.book.print_book()
+        self.assertEqual(mock_stdout.getvalue(), expected_output)
+
+    def test_print_book(self):
+        self.assert_stdout(2, '\n1: Fake Book by Fake Author (Fake Publisher)\n')
 
 
+"""
 class printBooksTest(unittest.TestCase):
 
     books = ["1: Python by Joseph Eddy Fontenrose (Biblo & Tannen Publishers)",

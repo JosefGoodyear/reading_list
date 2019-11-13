@@ -20,5 +20,5 @@ class Book:
             return ', '.join(self.authors)
 
     def print_book(self):
-        """ Add the id of the book """
+        """ Print the id of the book with the string representation """
         print('\n{}: {}'.format(self.id, self))
