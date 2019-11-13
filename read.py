@@ -29,7 +29,8 @@ def construct_books_array(items):
     """ Build a books array of all of the returned items """
     books = []
     for i in range(len(items)):
-        books.append(Book(items, i))
+        info = items[i].get('volumeInfo')
+        books.append(Book(info, i + 1))
         books[i].print_book()
     return books
 

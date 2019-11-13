@@ -1,12 +1,11 @@
 
 class Book:
 
-    def __init__(self, items, id):
-        book_info = items[id].get('volumeInfo')
-        self.id = id + 1
-        self.title = book_info.get('title')
-        self.authors = book_info.get('authors')
-        self.publisher = book_info.get('publisher')
+    def __init__(self, info, id):
+        self.id = id
+        self.title = info.get('title')
+        self.authors = info.get('authors')
+        self.publisher = info.get('publisher')
 
     def __str__(self):
         """ Return a formatted string of the book """
