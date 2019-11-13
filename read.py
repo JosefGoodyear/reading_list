@@ -34,7 +34,7 @@ def construct_books_array(obj):
 
 
 def validate_book_choice(books):
-    book_choice = input('Enter the corresponding number to add a book to' +
+    book_choice = input('\nEnter the corresponding number to add a book to' +
                         ' your reading list or any other key to exit:\n')
     if book_choice.isdigit() and 0 < int(book_choice) <= 5:
         return books[int(book_choice) - 1]
@@ -44,11 +44,11 @@ def validate_book_choice(books):
 def main():
     reading_list = ReadingList('ReadingList.txt')
     while True:
-        choice = input('Welcome to your reading list.' +
-                       ' Please choose an option:' +
-                       '\n1: Add a book\n2: View your reading list\n3: Exit\n')
+        choice = input('\nWelcome to your reading list.' +
+                       ' Please choose an option:\n\n' +
+                       '1: Add a book\n2: View your reading list\n3: Exit\n')
         if choice == '1':
-            obj = get_books(input('What are you looking for?\n'))
+            obj = get_books(input('\nWhat are you looking for?\n'))
             books = construct_books_array(obj)
             book = validate_book_choice(books)
             reading_list.add_book(book)
@@ -57,7 +57,7 @@ def main():
         elif choice == '3':
             exit()
         else:
-            print("That is not a valid choice. Please choose 1, 2, or 3.")
+            print("That is not a valid choice. Please choose 1, 2, or 3.\n")
 
 
 if __name__ == '__main__':

@@ -22,4 +22,4 @@ class Book:
 
     def print_book(self):
         """ Add the id of the book """
-        print('{}: {}'.format(self.id, self))
+        print('\n{}: {}'.format(self.id, self))

@@ -14,17 +14,17 @@ class ReadingList:
             book = str(book)
             with open(self.filename, "a+") as f:
                 f.write(book + '\n')
-            print("{} was added to your reading list.".format(book))
+            print("\n{} was added to your reading list.\n".format(book))
         except IOError:
             print('There was an error opening/writing to the file.' +
-                  ' {} was not added to your reading list.'.format(book))
+                  ' {} was not added to your reading list.\n'.format(book))
 
     def view(self):
         """ View the reading list """
         try:
             with open(self.filename) as f:
                 reading_list = f.read()
-            print()
+            print("\nReading List:\n")
             print(reading_list)
         except IOError:
-            print('{} could not be found.'.format(self.filename))
+            print('{} could not be found.\n'.format(self.filename))
