@@ -1,20 +1,3 @@
-import requests
-
-
-def get_books(query):
-    while query == '' or query.isspace():
-        print('You entered an empty search query.')
-        query = input('What do you want to search for?\n')
-    url = 'https://www.googleapis.com/books/v1/volumes?q={}'.format(query)
-    try:
-        obj = requests.get(url).json()
-    except (requests.exceptions.RequestException):
-        print('There was an error connecting to the Google Books API.' +
-              'Please check your internet connection and try again')
-        exit()
-    else:
-        return obj
-
 
 class Book:
 
@@ -37,18 +20,3 @@ class Book:
 
     def print_book(self):
         print('{}: {}'.format(self.id, self))
-
-    @staticmethod
-    def get_books(query):
-        while query == '' or query.isspace():
-            print('You entered an empty search query.')
-            query = input('What do you want to search for?\n')
-        url = 'https://www.googleapis.com/books/v1/volumes?q={}'.format(query)
-        try:
-            obj = requests.get(url).json()
-        except (requests.exceptions.RequestException):
-            print('There was an error connecting to the Google Books API.' +
-                  'Please check your internet connection and try again')
-            exit()
-        else:
-            return obj
