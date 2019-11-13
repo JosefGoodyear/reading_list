@@ -21,7 +21,7 @@ def get_books(query):
 
 
 def construct_books_array(obj):
-    """ build a books array of at most 5 Book objects """
+    """ Build a books array of at most 5 Book objects """
     books = []
     item_range = min(obj.get('totalItems'), 5)
     if item_range == 0:
