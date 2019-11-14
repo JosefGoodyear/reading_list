@@ -10,8 +10,8 @@ Pipfile and Pipfile.lock are included if you want to use a virtual environment. 
 Clone this project and type ```./read.py``` into the command line to start the program. From there, follow the instructions in your terminal.
 ### Files
 * **read.py**: Contains the main function for running the program.
-* **add_book.py**: Contains functions for adding books to the reading list.
-* **view_reading_list.py**: Contains functions for viewing the reading list.
+* **book.py**: Contains the Book class.
+* **reading_list.py**: Contains the ReadingList class.
 * **tests.py**: Contains tests for the program.
 ### Tests
 Tests have been built with Python's built-in unittest module. To run tests, enter ```./tests.py``` into the command line.
