@@ -23,4 +23,4 @@ class ReadingList:
             print("\nReading List:\n")
             print(reading_list)
         except IOError:
-            print('{} could not be found.\n'.format(self.filename))
+            print('\n{} could not be found.\n'.format(self.filename))

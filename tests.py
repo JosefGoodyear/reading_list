@@ -145,7 +145,7 @@ class ReadingListTest(unittest.TestCase):
 
     def test_view_fail(self):
         """ Check message for view failure """
-        self.assert_stdout_view(2, 'doesNotExist.txt could not be found.\n\n')
+        self.assert_stdout_view(2, '\ndoesNotExist.txt could not be found.\n\n')
 
 
 if __name__ == '__main__':
