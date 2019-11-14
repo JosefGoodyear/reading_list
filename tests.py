@@ -3,9 +3,9 @@ import unittest
 import os
 import io
 from unittest import mock
-from read import get_api_items
-from Book import Book
-from ReadingList import ReadingList
+from read import get_api_items, validate_book_choice
+from book import Book
+from reading_list import ReadingList
 
 
 class GetApiItemsTest(unittest.TestCase):
@@ -30,6 +30,19 @@ class GetApiItemsTest(unittest.TestCase):
     def test_no_results(self):
         """ Check that a call that yields no results returns false """
         self.assertFalse(get_api_items('kf4ierae132roiujmlero2jlk'))
+
+
+class ValidateBookChoiceTest(unittest.TestCase):
+
+    def test_nondigit_input(self):
+        """ Check that non-digit input returns False """
+        with mock.patch('builtins.input', return_value='a'):
+            self.assertFalse(validate_book_choice([1, 2, 3, 4, 5]))
+
+    def test_out_of_range_input(self):
+        """ Check that out of range input returns False """
+        with mock.patch('builtins.input', return_value='6'):
+            self.assertFalse(validate_book_choice([1, 2, 3, 4, 5]))
 
 
 class BookTest(unittest.TestCase):
