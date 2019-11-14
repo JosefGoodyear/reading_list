@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import requests
-from Book import Book
-from ReadingList import ReadingList
+from book import Book
+from reading_list import ReadingList
 
 
 def get_api_items(query):
@@ -14,7 +14,7 @@ def get_api_items(query):
     try:
         obj = requests.get(url).json()
     except requests.exceptions.RequestException:
-        print('There was an error connecting to the Google Books API.' +
+        print('\nThere was an error connecting to the Google Books API. ' +
               'Please check your internet connection and try again')
         return False
     else:
@@ -51,7 +51,7 @@ def main():
                        ' Please choose an option:\n\n' +
                        '1: Add a book\n2: View your reading list\n3: Exit\n')
         if choice == '1':
-            items = get_api_items(input('\nWhat are you looking for?\n'))
+            items = get_api_items(input('\nWhat do you want to search for?\n'))
             if items is False:
                 continue
             books = construct_books_array(items)

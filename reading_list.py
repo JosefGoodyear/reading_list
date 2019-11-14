@@ -1,6 +1,3 @@
-from Book import Book
-
-
 class ReadingList:
 
     def __init__(self, filename):
@@ -9,8 +6,6 @@ class ReadingList:
 
     def add_book(self, book):
         """ Add a book to the reading list """
-        if type(book) is not Book:
-            exit()
         try:
             book = str(book)
             with open(self.filename, "a+") as f:
