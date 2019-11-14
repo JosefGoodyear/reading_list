@@ -2,6 +2,7 @@
 class Book:
 
     def __init__(self, info, id):
+        """ Initialize a Book object """
         self.id = id
         self.title = info.get('title')
         self.authors = info.get('authors')

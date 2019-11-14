@@ -4,6 +4,7 @@ from Book import Book
 class ReadingList:
 
     def __init__(self, filename):
+        """ Initialize a ReadingList object """
         self.filename = filename
 
     def add_book(self, book):
