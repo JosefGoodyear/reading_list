@@ -5,7 +5,8 @@ from reading_list import ReadingList
 
 
 def get_api_items(query):
-    """ Return a JSON dictionary based on user's search term. """
+    """ Return a maximum of 5 book items from the Google API
+        based on a search term"""
     while query == '' or query.isspace():
         print('You entered an empty search query.')
         query = input('What do you want to search for?\n')
@@ -36,6 +37,7 @@ def construct_books_array(items):
 
 
 def validate_book_choice(books):
+    """ Validate user's book choice """
     book_choice = input('\nEnter the corresponding number to add a book to' +
                         ' your reading list or any other key to return' +
                         ' to the main menu:\n')
